@@ -8,7 +8,7 @@ class WeatherService
 {
     public function getWeather(string $city)
     {
-        $response = Http::get(
+        return Http::get(
             'https://api.openweathermap.org/data/2.5/weather',
             [
                 'q' => $city,
@@ -16,10 +16,7 @@ class WeatherService
                 'units' => 'metric',
             ]
         );
-
-        dd($response->json());
     }
-
     public function getForecast(string $city)
     {
         return Http::get(
