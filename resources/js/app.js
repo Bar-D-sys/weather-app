@@ -1,3 +1,4 @@
+import '../css/app.css';
 import 'bootstrap';
 // Check saved theme
 if (localStorage.getItem("theme") === "dark") {
