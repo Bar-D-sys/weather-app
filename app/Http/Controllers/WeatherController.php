@@ -29,14 +29,9 @@ class WeatherController extends Controller
 
         $response = $weatherService->getWeather($city);
         $forecastResponse = $weatherService->getForecast($city);
-        $airQualityResponse = $weatherService->getAirQuality(
-            $response->json()['coord']['lat'],
-            $response->json()['coord']['lon']
-        );
 
         $weather = $response->json();
         $forecast = $forecastResponse->json();
-        $airQuality = $airQualityResponse->json();
 
         if ($response->failed() || $forecastResponse->failed()) {
 
@@ -47,7 +42,16 @@ class WeatherController extends Controller
                 'favorites' => $favorites,
             ]);
         }
+
+        $airQualityResponse = $weatherService->getAirQuality(
+            $weather['coord']['lat'],
+            $weather['coord']['lon']
+        );
+
+        $airQuality = $airQualityResponse->json();
+
         $favorites = FavoriteCity::latest()->get();
+
         return view('home', [
             'city' => $city,
             'weather' => $weather,
