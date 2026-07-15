@@ -1,3 +1,4 @@
+console.log("APP JS LOADED");
 import '../css/app.css';
 import 'bootstrap';
 // Check saved theme
